@@ -1,0 +1,27 @@
+
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+p{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input{
+    font-size: 20px;
+}
+
+.p__label{
+    font-size: 22px
+    
+}
