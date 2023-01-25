@@ -6,6 +6,8 @@
 </head>
 
 <body>
+
+
    
     <form action="" method="post">
     <p>
@@ -34,10 +36,7 @@
 <?php
 
 
-    require_once 'database.php'; 
-    $pdo=db_connect();
-
-   
+    
 
 
    
@@ -50,10 +49,7 @@
 
 
 if (isset($_POST['submit'])) {
-    echo 'niet leeg';
-    print_r ($pdo);
-
-    print_r($_POST);
+    
     $user = $_POST['voornaam'];
     $user__validate = trim(stripslashes(htmlspecialchars($user)));
     
@@ -65,19 +61,21 @@ if (isset($_POST['submit'])) {
 
     $wachtwoord = $_POST['wachtwoord'];
     $wachtwoord__validate = trim(stripslashes(htmlspecialchars($wachtwoord)));
-
-    $sql = "INSERT INTO aanmelden ('naam','email','telefoonnummer','wachtwoord') VALUES ('".$user__validate."', '".$email__validate."' , '".$text__telefoonnumer."', '".$wachtwoord__validate."')";
-    echo 'Query: '.$sql;
-    if($pdo->query($sql) === TRUE){
-        echo "connectie gelukt";
+    try{
+        require_once 'database.php'; 
+        $pdo=db_connect();
+    
+       
+        $sql = "INSERT INTO aanmelden (naam, email, telefoonnummer,wachtwoord) VALUES ('".$user__validate."', '".$email__validate."' , '".$text__telefoonnumer."', '".$wachtwoord__validate."')";
+    
+    $pdo->query($sql);
+    echo "query uitgevoerd";
+    $result = $pdo->query("select * from aanmelden");
+    var_dump($result->fetch());
     }
-    else{
-        echo "connectie gefaald";
+    catch(Exception $e){
+        echo $e;
     }
-
-    print_r($pdo) ;
-
-    // $pdo->close();
 
 
     
@@ -90,5 +88,10 @@ else{
 
 // echo $sql
 ?>
+
+<?php
+
+?>
+
 
 </html>
